@@ -1,0 +1,117 @@
+name: Numerical disagreement
+description: A computed result disagrees with a measurement, another tool, or a closed form.
+labels: ["bug", "validation"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        A screenshot of a curve is not a report. Nothing below can be recovered
+        from one, and without all of it the disagreement cannot be re-run, which
+        means it cannot be judged and cannot be fixed.
+
+        Attach the room and material files themselves rather than describing
+        them. Where a file cannot be attached, say why, and give the geometry
+        and the surface data in full instead.
+
+  - type: textarea
+    id: disagreement
+    attributes:
+      label: What disagrees with what
+      description: >-
+        Name both sides. Our result against a measurement, against another tool,
+        or against a closed form, and which of the two you believe.
+    validations:
+      required: true
+
+  - type: textarea
+    id: room
+    attributes:
+      label: The room
+      description: >-
+        The room definition, attached or pasted in full. Dimensions, surfaces
+        and anything inside the room that was modelled.
+    validations:
+      required: true
+
+  - type: textarea
+    id: materials
+    attributes:
+      label: The materials
+      description: >-
+        The surface data for every surface, in the form it was supplied in, and
+        where the numbers came from. Say which surfaces were left at whatever
+        the tool does by default.
+    validations:
+      required: true
+
+  - type: input
+    id: frequency-range
+    attributes:
+      label: Frequency range and resolution
+      description: >-
+        The band asked for and the frequency spacing of the result.
+    validations:
+      required: true
+
+  - type: textarea
+    id: sources-receivers
+    attributes:
+      label: Source and receiver positions
+      description: >-
+        Coordinates in the same frame as the room, for every source and every
+        receiver used.
+    validations:
+      required: true
+
+  - type: textarea
+    id: command
+    attributes:
+      label: The command that produced the result
+      description: >-
+        The invocation in full, including every option that is not the default.
+      render: shell
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: >-
+        The release, or the output of `git rev-parse HEAD` for a build from
+        source.
+    validations:
+      required: true
+
+  - type: textarea
+    id: other-side
+    attributes:
+      label: How the other side was produced
+      description: >-
+        For a measurement, the room, the equipment and the method. For another
+        tool, its name, its version and its input files. For a closed form, the
+        expression and where it is published.
+    validations:
+      required: true
+
+  - type: textarea
+    id: comparison
+    attributes:
+      label: How the two were compared, and by how much they differ
+      description: >-
+        The comparison used, its units, and the largest deviation with the
+        frequency it occurs at. A statement that the curves look different is
+        not a comparison.
+    validations:
+      required: true
+
+  - type: textarea
+    id: done-when
+    attributes:
+      label: Done when
+      description: >-
+        What has to be true for this to be closed. A disagreement that turns out
+        to be correct behaviour closes by that being written down and by the
+        documentation saying it.
+    validations:
+      required: true
