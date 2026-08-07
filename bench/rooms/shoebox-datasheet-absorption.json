@@ -1,0 +1,49 @@
+{
+ "id": "shoebox-datasheet-absorption",
+ "description": "The same rectangular room, with its surfaces given as octave band absorption coefficients rather than as an impedance. It is in the set because this is the only form in which a user actually has material data, and because every candidate has to do something with it. Whoever runs the bench then sees which candidates refuse it, which convert it, and what each conversion assumes, instead of that step disappearing inside an adapter where nobody argues with it. The numbers below are a plausible carpeted floor and a plausible plastered wall and they are not taken from any measurement, so this room is for exercising the route rather than for judging an answer.",
+ "geometry": {
+  "kind": "box",
+  "dimensions_m": [5.15, 3.79, 2.71]
+ },
+ "surfaces": [
+  {
+   "id": "floor",
+   "applies_to": "the surface at z = 0",
+   "model": {
+    "kind": "absorption_octave_bands",
+    "note": "random incidence absorption coefficients, the form a datasheet or a standard table gives; not measured, see the description",
+    "bands_hz": [63, 125, 250, 500],
+    "alpha": [0.05, 0.08, 0.12, 0.25]
+   }
+  },
+  {
+   "id": "rest",
+   "applies_to": "every other surface of the box",
+   "model": {
+    "kind": "absorption_octave_bands",
+    "note": "not measured, see the description",
+    "bands_hz": [63, 125, 250, 500],
+    "alpha": [0.03, 0.03, 0.04, 0.05]
+   }
+  }
+ ],
+ "air": {
+  "temperature_c": 20.0,
+  "relative_humidity_percent": 50.0
+ },
+ "sources": [
+  {
+   "id": "corner",
+   "kind": "point_volume_velocity",
+   "position_m": [0.3, 0.3, 0.3],
+   "strength_m3_s": 0.001
+  }
+ ],
+ "receivers": [
+  {
+   "id": "seat",
+   "kind": "point_pressure",
+   "position_m": [2.1, 1.35, 1.2]
+  }
+ ]
+}

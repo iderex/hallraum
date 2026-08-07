@@ -1,0 +1,37 @@
+{
+ "id": "slanted-ceiling",
+ "description": "A room with the same floor as the shoebox and a ceiling that rises from 2.40 metres at one end to 3.20 metres at the other, so that one surface is parallel to nothing. It is in the set because it is where the candidate families stop agreeing: a structured grid has to approximate the slope by stepping it and pays for the step at exactly the frequencies where the room is being asked about, while an unstructured mesh follows the surface and pays for a mesher instead. It is also the cheapest room that is not a box, which matters because the first question a user asks about a wave solver is whether their room has to be rectangular.",
+ "geometry": {
+  "kind": "box_with_slanted_ceiling",
+  "footprint_m": [5.15, 3.79],
+  "height_at_x_min_m": 2.4,
+  "height_at_x_max_m": 3.2,
+  "note": "the ceiling is a single plane through the two heights, the slope runs along x and the surface is flat across y"
+ },
+ "surfaces": [
+  {
+   "id": "all",
+   "applies_to": "every surface of the room",
+   "model": {"kind": "rigid"}
+  }
+ ],
+ "air": {
+  "temperature_c": 20.0,
+  "relative_humidity_percent": 50.0
+ },
+ "sources": [
+  {
+   "id": "corner",
+   "kind": "point_volume_velocity",
+   "position_m": [0.3, 0.3, 0.3],
+   "strength_m3_s": 0.001
+  }
+ ],
+ "receivers": [
+  {
+   "id": "seat",
+   "kind": "point_pressure",
+   "position_m": [2.1, 1.35, 1.2]
+  }
+ ]
+}

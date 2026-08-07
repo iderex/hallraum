@@ -1,0 +1,8 @@
+# Run artefacts. A measurement belongs in an issue or a record with the machine
+# and the commit it was taken at, not in the tree where it goes stale silently.
+out/
+
+# Byte code the interpreter leaves behind. Ignored so that running the bench
+# does not by itself make the tree dirty, which the result file reports and
+# which would otherwise be true of every run.
+__pycache__/

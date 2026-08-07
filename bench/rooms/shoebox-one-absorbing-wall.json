@@ -1,0 +1,44 @@
+{
+ "id": "shoebox-one-absorbing-wall",
+ "description": "The same rectangular room, with one end wall given a frequency independent normalised surface impedance and every other surface left rigid. It is in the set because it is the first room here with no closed form to check against, and because a single absorbing surface is the smallest change that separates candidates by what they can do at a wall. A candidate that only knows rigid boundaries refuses it, a candidate that takes a real impedance runs it, and the difference between the two curves is the whole subject this project exists for. One wall rather than all six keeps the modal structure recognisable, so a result can still be read against the rigid case.",
+ "geometry": {
+  "kind": "box",
+  "dimensions_m": [5.15, 3.79, 2.71]
+ },
+ "surfaces": [
+  {
+   "id": "wall-x-max",
+   "applies_to": "the surface at x = 5.15",
+   "model": {
+    "kind": "impedance_normalised",
+    "note": "surface impedance divided by the characteristic impedance of air, frequency independent",
+    "real": 4.0,
+    "imaginary": 0.0
+   }
+  },
+  {
+   "id": "rest",
+   "applies_to": "every other surface of the box",
+   "model": {"kind": "rigid"}
+  }
+ ],
+ "air": {
+  "temperature_c": 20.0,
+  "relative_humidity_percent": 50.0
+ },
+ "sources": [
+  {
+   "id": "corner",
+   "kind": "point_volume_velocity",
+   "position_m": [0.3, 0.3, 0.3],
+   "strength_m3_s": 0.001
+  }
+ ],
+ "receivers": [
+  {
+   "id": "seat",
+   "kind": "point_pressure",
+   "position_m": [2.1, 1.35, 1.2]
+  }
+ ]
+}
