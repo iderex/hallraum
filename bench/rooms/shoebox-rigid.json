@@ -1,0 +1,34 @@
+{
+ "id": "shoebox-rigid",
+ "description": "A rectangular room of 5.15 by 3.79 by 2.71 metres with every surface perfectly rigid. It is in the set because it is the only room here whose answer is known without running anything: the modal sum for a rigid box is a closed form, so a candidate that gets this wrong is wrong for a reason that needs no second tool to establish. The dimensions are in the ratio 1 to 1.40 to 1.90, chosen so that no axial mode of one direction lands on one of another: below 300 Hz the closest pair of axial modes from two different directions is 2.55 Hz apart, which a one Hertz grid separates, so a mode computed in the wrong place shows up as a peak of its own rather than hiding underneath a neighbour. It is also the cheapest room in the set, which makes it the one to run first when a candidate is being tried for the first time.",
+ "geometry": {
+  "kind": "box",
+  "dimensions_m": [5.15, 3.79, 2.71]
+ },
+ "surfaces": [
+  {
+   "id": "all",
+   "applies_to": "every surface of the box",
+   "model": {"kind": "rigid"}
+  }
+ ],
+ "air": {
+  "temperature_c": 20.0,
+  "relative_humidity_percent": 50.0
+ },
+ "sources": [
+  {
+   "id": "corner",
+   "kind": "point_volume_velocity",
+   "position_m": [0.3, 0.3, 0.3],
+   "strength_m3_s": 0.001
+  }
+ ],
+ "receivers": [
+  {
+   "id": "seat",
+   "kind": "point_pressure",
+   "position_m": [2.1, 1.35, 1.2]
+  }
+ ]
+}
