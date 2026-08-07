@@ -1,0 +1,73 @@
+name: Defect
+description: Something in this repository does not do what it says it does.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        An issue says what is wrong, what the evidence is, and what done means.
+        Where the evidence is a number, it carries the command that produced it,
+        run against the reference a reader will have rather than your working
+        tree.
+
+        If the defect is that a computed number is wrong, use the numerical
+        disagreement form instead. It asks for the inputs, and a curve without
+        its inputs cannot be re-run.
+
+  - type: textarea
+    id: what-is-wrong
+    attributes:
+      label: What is wrong
+      description: What happens, and what should happen instead.
+    validations:
+      required: true
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence, with the command that produced it
+      description: >-
+        Paste the command and its output. Say which commit it was run at.
+      render: shell
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: How to reproduce
+      description: >-
+        The shortest sequence that shows it. If it does not reproduce every
+        time, say how often it appeared.
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: >-
+        The release, or the output of `git rev-parse HEAD` for a build from
+        source.
+    validations:
+      required: true
+
+  - type: input
+    id: platform
+    attributes:
+      label: Operating system and toolchain
+      description: >-
+        Only where it could matter. Say so if you have not checked whether it
+        matters.
+    validations:
+      required: false
+
+  - type: textarea
+    id: done-when
+    attributes:
+      label: Done when
+      description: >-
+        What has to be true for this to be closed. Write it so that somebody
+        other than you can decide whether it holds.
+    validations:
+      required: true

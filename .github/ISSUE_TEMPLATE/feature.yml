@@ -1,0 +1,62 @@
+name: Feature
+description: Something this project should be able to do and cannot.
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Planning happens on the tracker before the code that depends on it
+        exists, so a feature request is read as a proposal rather than as a
+        wish. It is easier to argue with a proposal that says what it costs.
+
+  - type: textarea
+    id: what-is-missing
+    attributes:
+      label: What is missing
+      description: >-
+        What you are trying to do, and where the project stops. Describe the
+        task rather than the change you have in mind for it.
+    validations:
+      required: true
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: >-
+        Why this is needed, and by whom. Where the evidence is a number, give
+        the command that produced it. Where it is somebody's experience, say
+        whose.
+    validations:
+      required: true
+
+  - type: textarea
+    id: today
+    attributes:
+      label: What you do today instead
+      description: >-
+        The workaround, and what it costs. A request with no workaround behind
+        it is usually the first thing anybody hits, which is worth knowing.
+    validations:
+      required: false
+
+  - type: textarea
+    id: cost
+    attributes:
+      label: What it would cost
+      description: >-
+        What this would add that the project does not already carry, as far as
+        you can see it. A dependency, a second way of doing something, a number
+        that then has to be maintained. Say so if you do not know.
+    validations:
+      required: false
+
+  - type: textarea
+    id: done-when
+    attributes:
+      label: Done when
+      description: >-
+        What has to be true for this to be closed, written so that somebody
+        other than you can decide whether it holds.
+    validations:
+      required: true
