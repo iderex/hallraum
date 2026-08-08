@@ -62,9 +62,44 @@ Issue #35 is where a file that is not a room is refused on the way in, and issue
 #36 is where a geometry that does not close is either made watertight or has the
 place it fails named. Both take their scope from this section.
 
+Refused means the run does not start. It does not mean the software may not
+first close a gap that falls inside a tolerance somebody wrote down, and issue
+#36 is where those checks and their tolerances are set. What this section fixes
+is the end state and the disclosure. What reaches the solver bounds a closed
+volume, and every difference between it and the file the user wrote is carried
+into the result rather than only into a log. A weld nobody was told about is the
+one outcome refused outright, because a result about a room that was quietly
+altered is a result about a room that does not exist.
+
 Later tiers are reachable in this order. Curved surfaces meshed as curves, which
 needs the method to support them and is therefore behind issue #5 rather than
 behind any geometry work. Nothing else is planned above them.
+
+## An opening, and a room that is not alone
+
+A room with a wide doorway into the next space is one air volume below 300 Hz
+whatever the floor plan calls it, and a room with a closed door in a wall is
+not. The tier above answers both, the answer was never written down, and issue
+#36 and issue #38 were each left to invent one.
+
+A closed door, a window and a hatch are faces like any other and carry their own
+material. There is nothing special about them.
+
+Two spaces joined by an opening are described as one closed polyhedron with no
+face across the opening. There is no second room type, no coupling coefficient
+and nothing new in the file. The pair is a single non-convex room, which is the
+third tier, and the opening is where the user placed no face. What it costs is
+that the second space has to be modelled too, with its own surfaces and its own
+materials, and that cost is the answer rather than a limitation of it.
+
+An opening onto a space that is not modelled is refused in the first release.
+That is a place where the room ends and no face exists, and any face put there
+would be a boundary condition the software invented. Sound leaving and not
+coming back is a termination, not a material, and the two are decided elsewhere:
+issue #56 is where a domain that does not end at a wall is terminated, and issue
+#8 is where what an impedance means at a wall is settled. Until both land there
+is no defensible number to put on that face, and a refusal says so where a
+default would not.
 
 ## What is inside the room
 
@@ -98,6 +133,11 @@ and its bounding surfaces, so an object modelled as a surface with no volume
 removed would leave the air where the object is and shift every mode. Issue #37
 reports what the discretisation lost, and the volume removed by objects is part
 of what it reports.
+
+A source or a receiver placed inside an accepted object is not in the air, and a
+run that puts one there is asking for the pressure inside a wardrobe. Issue #44
+is where an assembled problem is checked before anything expensive starts, and
+this is one of the checks it owes.
 
 ## The scale limits
 
@@ -165,7 +205,10 @@ does not settle the material vocabulary at a surface, which is issue #40 and
 issue #8. It does not settle the upper frequency, which is issue #11 and is
 where the numbers above get their meaning.
 
-It also does not yet govern the work it is written for. The condition issue #10
-sets is that every later geometry issue takes its scope from this document, and
-those issues were written before it existed. Until each of them has been read
-against it, this document states a scope rather than holds one.
+It did not govern the work it is written for on the day it landed, because every
+geometry issue in the room milestone was written before it existed. Each has
+since been read against it, and the result is on issue #10, one entry per issue,
+saying what that issue takes from here and what it still has to add. Three of
+the passages above came out of that reading: the section on openings, the
+paragraph saying what refused means, and the sentence about a source inside an
+object. Nothing the reading found moved the tier.
