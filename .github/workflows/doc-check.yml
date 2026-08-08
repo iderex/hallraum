@@ -1,0 +1,49 @@
+name: doc-check
+
+on:
+  # Every branch and every pull request. The check reads the tracked tree and
+  # runs one tracked program, so it is cheap enough to run everywhere and there
+  # is no branch on which a document is allowed to name a path that is not
+  # there.
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: ["**"]
+
+# Read-only: the check reads tracked documents and prints refusals. It never
+# rewrites a document, because a job that reformats and pushes hides the fact
+# that a contributor's local setup is wrong.
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  documents:
+    name: Check documents
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # No step pushes via git, so do not persist the GITHUB_TOKEN in .git/config.
+          persist-credentials: false
+
+      - name: Prove each rule refuses its own fixture
+        run: |
+          # A guard that has never been shown to bite is a guard nobody can
+          # trust. This runs every rule against the smallest violation of it and
+          # against a near neighbour it must not refuse, and fails if either
+          # answer moves. It runs before the tree check so that a broken rule is
+          # reported as a broken rule rather than as a clean tree.
+          python3 tools/doc-check.py --selftest
+
+      - name: Check every tracked document
+        run: |
+          # Refusals are printed one per line as path:line: rule: what was
+          # refused. A non-zero exit is a refusal; the script fails closed on a
+          # git or interpreter error rather than reporting a clean tree.
+          python3 tools/doc-check.py --root .
