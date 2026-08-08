@@ -177,6 +177,8 @@ Produced at this commit by the program beside this document:
 
     python docs/memory-model.py
 
+<!-- generated: python docs/memory-model.py -->
+
     c = 343 m/s, 6 points per wavelength, 3 array(s) of 4 byte(s),
     8 stored value(s) per boundary node, Courant 0.5774, 1 s modelled.
     Rooms are taken as cubes for their surface area.
@@ -215,6 +217,8 @@ Produced at this commit by the program beside this document:
            4000     0.01429       4.157e+04       3.426e+05
            8000     0.00715       8.314e+04       2.741e+06
           16000     0.00357       1.663e+05       2.192e+07
+
+<!-- end generated -->
 
 The marked cells are the ones above 64 GiB, and the mark is on the cell rather
 than on the row because within one row the frequency decides it. 64 GiB is
