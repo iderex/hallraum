@@ -233,9 +233,13 @@ project sits in.
 What is not determined is which specific cases in it are bounded interior
 problems in the band below 300 Hz with a non-rigid boundary, whether their
 reference data is in a form this project can compare against, and what tolerance
-each publishes. Nothing here read the case list. That is the work this entry
-names and it has not been done, so no case identifier and no tolerance is quoted,
-because quoting one would be inventing it.
+each publishes. The case list was not read, and the attempt is recorded rather
+than the intention: the address above redirects to the hosting institute's site,
+and the two pages reached from there give four categories, of which linear
+acoustics is the relevant one, without the individual cases under them. So no
+case identifier and no tolerance is quoted, because quoting one would be
+inventing it. This tier is therefore named and not populated, which is the one
+place in this document where a tier has a source and no case.
 
 Long run rather than fast suite, because the geometry of a benchmark case is not
 chosen to be cheap. The harness is issue #73.
