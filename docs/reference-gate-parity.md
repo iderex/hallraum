@@ -63,8 +63,9 @@ Adapted and delivered by #100, which asks for a code scanning gate for whatever
 language this repository turns out to be written in. Waits on #17.
 
 **DCO sign-off.** Adopted, and already in this tree. The certificate it asserts
-landed in #130 and #25 holds the remaining half, which is the sentence in the
-contribution guide.
+landed in #130, the sentence in the contribution guide that #25 was left open
+for landed in #138, and #25 is closed. The check is still advisory, like every
+other one here, until #33 is granted.
 
 **Deterministic PR-hygiene checks.** Adopted and delivered by #106.
 
