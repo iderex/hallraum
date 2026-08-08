@@ -1,0 +1,49 @@
+name: text-guard
+
+on:
+  # Every branch and every pull request. The guard reads the index and one
+  # tracked program, so it is cheap enough to run everywhere, and there is no
+  # branch on which a stored carriage return is allowed.
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: ["**"]
+
+# Read-only: the guard reads what git holds and prints refusals. It never
+# rewrites a file, because a job that normalises and pushes hides the fact that
+# a contributor's clone is configured to convert line endings, which is the
+# thing this guard exists to make visible.
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  text:
+    name: Check stored text
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # No step pushes via git, so do not persist the GITHUB_TOKEN in .git/config.
+          persist-credentials: false
+
+      - name: Prove each rule refuses its own case
+        run: |
+          # A guard nobody has watched bite is a guard nobody can trust. This
+          # runs every rule against the smallest violation of it and against the
+          # near neighbour it must not refuse, and fails if either answer moves.
+          # It runs before the tree scan so that a broken rule is reported as a
+          # broken rule rather than as a clean tree.
+          python3 tools/text-guard.py --self-test
+
+      - name: Check every tracked file
+        run: |
+          # Refusals print as path, rule, and what was found, followed by the
+          # failure that rule prevents. A non-zero exit is a refusal; the guard
+          # exits 2 on a git error rather than reporting a clean tree.
+          python3 tools/text-guard.py
