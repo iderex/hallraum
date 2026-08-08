@@ -13,6 +13,33 @@ is in `DCO`. The gate refuses a branch without it, and it refuses every commit
 rather than the last one, so this is cheaper to get right the first time than to
 repair afterwards.
 
+Sign your commits as well, which is a different thing from signing them off. A
+sign-off is a sentence you assert; a signature is what makes the history
+attributable. Every commit on the default branch is verified today and nothing
+requires it:
+
+    gh api 'repos/iderex/hallraum/commits?per_page=100' --jq '[.[] | .commit.verification.verified] | {commits: length, verified: (map(select(.)) | length)}'
+    {"commits":26,"verified":26}
+
+    gh api repos/iderex/hallraum/rulesets/20527699 --jq '[.rules[].type]'
+    ["deletion","non_fast_forward","pull_request"]
+
+So this is practice rather than a rule, and issue #109 is the request that the
+ruleset carry it. `PROSE, NOT ENFORCEMENT` until that is granted.
+
+When signing fails, fix the signing. Do not turn it off, in either spelling:
+
+    git commit --no-gpg-sign
+    git -c commit.gpgsign=false commit
+
+Neither is refused by anything here, which is exactly why the rule is written
+down. Nothing in this tree reads a signature, so a bypassed commit builds and
+reads like any other and the only thing that would say otherwise is the merge,
+at the end of the line. Once #109 is granted, the repair for a branch carrying
+one unsigned commit is to re-sign every commit onto a fresh branch and open the
+landing again, not an exception, and that cost is paid after the work is
+finished rather than before it.
+
 ## Building
 
 There is nothing to build. This repository holds documents, a bench that
