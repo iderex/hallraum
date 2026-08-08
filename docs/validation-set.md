@@ -225,21 +225,47 @@ Benchmark Cases in Computational Acoustics", Acta Acustica united with Acustica
 acoustics technical committee of the European Acoustics Association and hosted at
 https://eaa-bench.mec.tuwien.ac.at/main/ . Cases and submitted results are open.
 
-What is determined about it here is that it exists, that it is the right kind of
-object, that it categorises cases as bounded or unbounded and as time domain or
-frequency domain, and that a bounded interior problem is the category this
-project sits in.
+The address above answers 301 and redirects to the hosting institute's site. The
+case list is two pages in from there, under Benchmarks, and it exists: four
+categories are named, only linear acoustics carries cases of its own, and that
+page lists five of them, each with a case document behind it.
 
-What is not determined is which specific cases in it are bounded interior
-problems in the band below 300 Hz with a non-rigid boundary, whether their
-reference data is in a form this project can compare against, and what tolerance
-each publishes. The case list was not read, and the attempt is recorded rather
-than the intention: the address above redirects to the hosting institute's site,
-and the two pages reached from there give four categories, of which linear
-acoustics is the relevant one, without the individual cases under them. So no
-case identifier and no tolerance is quoted, because quoting one would be
-inventing it. This tier is therefore named and not populated, which is the one
-place in this document where a tier has a source and no case.
+    curl -sL https://www.tuwien.at/en/mwbw/mec/e325-03-research-unit-of-measurement-and-actuator-technology/eaa-benchmarks/benchmarks/linear-acoustics | grep -c 'Linear acoustics benchmark problem'
+    5
+
+The five were read, each from its own case document rather than from the summary
+on the page, because every case document carries a table saying whether the case
+is bounded, what the boundary condition is and at which frequencies the case is
+to be computed. What that reading found:
+
+Duct is the only bounded case. It is a 3.4 m duct of 0.2 by 0.2 m cross section,
+rigid on the walls and terminated by an impedance of rho c at one end, so it is a
+bounded interior problem with a non-rigid boundary, which is exactly the shape
+this project needs. Its case document prescribes the frequencies for computation
+as 850 to 3400 Hz in steps of 425 Hz, entirely above the 300 Hz this project
+claims, and the reason is in the case itself: the cross modes of that duct start
+at 850 Hz and studying them is what the case is for. Its results table is an
+unfilled template, its computational details table is empty, and the page lists
+no submitted solution for it, so there is no number to compare against at any
+frequency, in band or out of it.
+
+Cat's eye, Radiatterer and PAC-MAN are each recorded as unbounded in their own
+tables, and each specifies Z = infinity at its boundaries, so all three fail both
+halves of the filter rather than one.
+
+BRAS is bounded and interior, and it is a database of measured impulse responses
+rather than numbers somebody computed, which is the distinction between this tier
+and the next one. It is already in this document as V7, one tier down, where it
+belongs.
+
+So this tier holds no case that is a bounded interior problem below 300 Hz with a
+non-rigid boundary and a published reference solution, and that is now a
+statement about the platform rather than about how far anybody looked. Two things
+would change it, and neither is in this project's hands: a submitted solution
+appearing against the Duct case, which would make it usable above the band as a
+check on the scheme rather than on the wall model, or a case being added under
+linear acoustics that sits in the band. Both are visible from the page above and
+neither needs anything else to be checked.
 
 Long run rather than fast suite, because the geometry of a benchmark case is not
 chosen to be cheap. The harness is issue #73.
@@ -260,7 +286,10 @@ https://depositonce.tu-berlin.de/items/457e9d28-8ce0-4f57-a6b2-08b1f57efa53 and
 is a set of acoustical scenes, each carrying a geometry, source and receiver
 positions and characteristics, a material description, and measured single
 channel and binaural impulse responses. Some scenes are deliberately simple and
-isolate one phenomenon; others are whole rooms.
+isolate one phenomenon; others are whole rooms. It is also the fifth entry in the
+linear acoustics list under V6, which is why that tier's only other interior case
+is already here rather than there: what it publishes is measured, and V6 is for
+what somebody computed.
 
 What it tests, for this project, is whether a modelled room agrees with the room
 it was modelled from. What it cannot test is the impedance model directly, and
@@ -341,5 +370,7 @@ pretending otherwise would be the exact failure this document exists against.
 There is no case here for an extended reaction wall, because no method surveyed
 offers one and issue #8 has not decided whether this project will.
 
-Tier three is named but not populated, and the paragraph in V6 says exactly which
-part was not done.
+Tier three is named and not populated. Its case list has been read and V6 says
+why: the platform's one bounded case is prescribed above the band this project
+claims and carries no reference values, and everything else under linear
+acoustics is either unbounded and rigid or is a measurement, which is tier four.
