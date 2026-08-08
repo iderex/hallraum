@@ -1,0 +1,21 @@
+# Every tracked file in this repository is UTF-8 text, stored with LF, and
+# checked out with LF on every platform. The catch-all below is what makes that
+# true for a file type nobody has added yet, which is the case a list of
+# extensions gets wrong.
+#
+# tools/text-guard.py refuses a stored carriage return, a leading byte order
+# mark, bytes that are not UTF-8, a missing final newline, a tracked path this
+# file does not reach, and a path that would be checked out with anything but
+# LF. It reads the bytes git holds rather than the bytes in the working tree,
+# so a clone configured to convert line endings is judged on what it would
+# push rather than on what it checked out.
+#
+# A fixture that has to carry a byte the normalisation would remove is not
+# exempted here. It is stored encoded, in base64 in the source of the test that
+# needs it, so that the bytes reaching the code under test are exact and no
+# checkout setting can repair them on the way in. Turning normalisation off for
+# a path instead is possible and needs the reason on the line above the
+# pattern, which the guard refuses a pattern without. There is no such pattern
+# in this file today.
+
+* text=auto eol=lf
