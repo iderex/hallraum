@@ -15,11 +15,12 @@ repair afterwards.
 
 Sign your commits as well, which is a different thing from signing them off. A
 sign-off is a sentence you assert; a signature is what makes the history
-attributable. Every commit on the default branch is verified today and nothing
-requires it:
+attributable. Every commit on the default branch is verified and nothing
+requires it. Run at `36441910e39ecc2c506e99bf03ed1715803ed621`, and the count
+moves with every merge, so re-run it rather than reading it:
 
     gh api 'repos/iderex/hallraum/commits?per_page=100' --jq '[.[] | .commit.verification.verified] | {commits: length, verified: (map(select(.)) | length)}'
-    {"commits":26,"verified":26}
+    {"commits":30,"verified":30}
 
     gh api repos/iderex/hallraum/rulesets/20527699 --jq '[.rules[].type]'
     ["deletion","non_fast_forward","pull_request"]
